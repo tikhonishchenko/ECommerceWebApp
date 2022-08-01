@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace ECommerceWebApp.Controllers
@@ -96,13 +97,42 @@ namespace ECommerceWebApp.Controllers
                     {
                         var token = CreateToken(foundUser);
                         activeUser = foundUser;
-                        activeUser.WebToken = token;
+
+                        var refreshToken = GenerateRefreshToken(token);
+                        SetRefreshToken(refreshToken);
+
                         return Ok(token);
                     }
                 }
                 return Unauthorized();
             }
             return BadRequest("Invalid client request");
+        }
+
+        private void SetRefreshToken(RefreshToken refreshToken)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = refreshToken.Expires
+            };
+            Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
+
+            activeUser.WebToken = refreshToken.Token;
+        }
+
+       
+
+        private RefreshToken GenerateRefreshToken(string token)
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = token,
+                Expires = DateTime.Now.AddDays(7),
+                Created = DateTime.Now
+            };
+
+            return refreshToken;
         }
 
         [Authorize]
@@ -148,7 +178,8 @@ namespace ECommerceWebApp.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(ClaimTypes.Surname, user.CartSave)
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value));
 

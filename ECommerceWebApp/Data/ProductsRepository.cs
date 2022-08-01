@@ -16,11 +16,11 @@ namespace ECommerceWebApp.Data
             }
         }
 
-        internal async static Task<Product> GetProductById(int productID)
+        internal async static Task<Product> GetProductById(string productID)
         {
             using (var db = new ProductsDBContext())
             {
-                return await db.Products.FirstOrDefaultAsync( product => product.Id == productID);
+                return await db.Products.FirstOrDefaultAsync( product => product.Id.Equals(productID));
             }
         }
 
@@ -58,7 +58,7 @@ namespace ECommerceWebApp.Data
             }
         }
 
-        internal async static Task<bool> DeleteProductAsync(int productId)
+        internal async static Task<bool> DeleteProductAsync(string productId)
         {
             using (var db = new ProductsDBContext())
             {

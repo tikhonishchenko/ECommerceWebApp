@@ -5,7 +5,7 @@ namespace ECommerceWebApp.Model
     public class Product
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Required]
         [MaxLength(100)]
         public string Name { get; set; } = string.Empty;
@@ -16,6 +16,8 @@ namespace ECommerceWebApp.Model
         public string imageUrl { get; set; }
         [Required]
         public decimal Price { get; set; }
+        [Required]
+        public int Quantity { get; set; } = 1;
 
     }
 }

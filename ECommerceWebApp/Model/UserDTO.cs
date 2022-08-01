@@ -21,7 +21,7 @@ namespace ECommerceWebApp.Model
                 PasswordKey = passwordSalt,
                 Role = "User",
                 CartSave = String.Empty,
-                productsInCart = new List<Product>()
+                //productsInCart = new List<Product>()
 
             };
             return newUser;
@@ -36,7 +36,7 @@ namespace ECommerceWebApp.Model
                 PasswordKey = passwordSalt,
                 Role = "Admin",
                 CartSave = String.Empty,
-                productsInCart = new List<Product>()
+                //productsInCart = new List<Product>()
 
             };
             return newUser;

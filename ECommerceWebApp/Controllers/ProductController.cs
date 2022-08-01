@@ -37,7 +37,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [HttpGet("products/{id}")]
-        public async Task<ActionResult<List<Product>>> GetProductById(int id)
+        public async Task<ActionResult<List<Product>>> GetProductById(string id)
         {
 
             return Ok(await ProductsRepository.GetProductById(id));
@@ -46,12 +46,13 @@ namespace ECommerceWebApp.Controllers
 
         [Authorize]
         [HttpPost("addToCart/{id}")]
-        public async Task<IActionResult> AddToCartAsync(int id)
+        public async Task<IActionResult> AddToCartAsync(string id)
         {
             CheckUser();
             Product productToAdd = await ProductsRepository.GetProductById(id);
             activeUser.AddProductToCart(productToAdd);
-            return Ok("added to cart " + productToAdd.Name);
+            
+            return Ok(activeUser.getCartAsync());
         }
 
         private void CheckUser()
@@ -67,7 +68,7 @@ namespace ECommerceWebApp.Controllers
         public IActionResult GetCart()
         {
             CheckUser();
-            return Ok(activeUser.productsInCart);
+            return Ok(activeUser.getCartAsync());
         }
         [Authorize]
         [HttpGet("getUser")]

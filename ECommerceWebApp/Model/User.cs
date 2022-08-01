@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using ECommerceWebApp.Data;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace ECommerceWebApp.Model
 {
@@ -18,17 +21,14 @@ namespace ECommerceWebApp.Model
         public string Role { get; set; }
         
         [Required, MaxLength(1000)]
-        public string CartSave { get; set; } = string.Empty;
-        public List<Product> productsInCart { get; set; } = new List<Product>();
-
+        public string CartSave { get; set; }
 
         [NotMapped]
         public string WebToken { get; set; }
 
         public void AddProductToCart(Product product)
         {
-            productsInCart.Add(product);
-            if(CartSave != string.Empty)
+            if (CartSave != string.Empty)
             {
                 CartSave += "," + product.Id;
             }
@@ -36,28 +36,67 @@ namespace ECommerceWebApp.Model
             {
                 CartSave += product.Id;
             }
+            UpdateDatabase();
         }
 
-        public bool RemoveProductFromCart(Product product)
+        public void removeProductString(string remove)
         {
-            if(productsInCart.Count > 0)
+            if (CartSave.Contains(","))
             {
-                if (productsInCart.Contains(product))
+                try
                 {
-                    productsInCart.Remove(product);
-                    CartSave.Remove(product.Id);
-                    if(CartSave.Length > 0)
+                    string b = CartSave.Substring((CartSave.IndexOf(remove) - 2));
+                    if (b.Substring(1).Contains(","))
                     {
-                        CartSave.Replace(",,", ",");
+                        string c = b.Substring(0, b.Substring(1).IndexOf(",") + 1);
+                        CartSave = CartSave.Replace(c, "");
                     }
-                    return true;
+                    else if (b.Contains(","))
+                    {
+                        CartSave = CartSave.Replace(b, "");
+                    }
                 }
-                else
+                catch
                 {
-                    return false;
+                    string b = CartSave.Substring((CartSave.IndexOf(remove) - 1));
+                    if (b.Substring(1).Contains(","))
+                    {
+                        string c = b.Substring(0, b.Substring(1).IndexOf(",") + 2);
+                        CartSave = CartSave.Replace(c, "");
+                    }
+                    else if (b.Contains(","))
+                    {
+                        CartSave = CartSave.Replace(b, "");
+                    }
                 }
+
             }
-            return false;
+            else
+            {
+                CartSave = string.Empty;
+            }
+            UpdateDatabase();
+        }
+
+        private async void UpdateDatabase()
+        {
+            await UserRepository.UpdateUserAsync(this);
+        }
+
+        public async Task<List<Product>> getCartAsync()
+        {
+            string[] cartObjects = CartSave.Split(",");
+            List<Product> products = new List<Product>();
+            foreach (string objInCart in cartObjects)
+            {
+                objInCart.Replace("(", "");
+                objInCart.Replace(")", "");
+                string[] temp = objInCart.Split(";");
+                Product productToAdd = await ProductsRepository.GetProductById(temp[0]);
+                productToAdd.Quantity = Int32.Parse(temp[1]);
+                products.Add(productToAdd);
+            }
+            return products;
         }
 
     }
