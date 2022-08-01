@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ECommerceWebApp.Data;
+using System.Data;
 
 namespace ECommerceWebApp.Controllers
 {
@@ -12,13 +13,17 @@ namespace ECommerceWebApp.Controllers
     public class ProductController : ControllerBase
     {
         private List<Product> products = new List<Product>();
-        
 
         [HttpGet("products")]
-        public async Task<IActionResult> GetProducts()
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProducts()
         {
             products = await ProductsRepository.GetProductsAsync();
-            return Ok(products);
+            var response = new ServiceResponse<List<Product>>()
+            {
+                Data = products
+            };
+
+            return Ok(response);
         }
     }
 }

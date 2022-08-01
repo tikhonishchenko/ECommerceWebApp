@@ -6,48 +6,49 @@ using System.Threading.Tasks;
 
 namespace ECommerceWebApp.Data
 {
-    internal static class ProductsRepository
+    internal static class UserRepository
     {
-        internal async static Task<List<Product>> GetProductsAsync()
+        internal async static Task<List<User>> GetUsersAsync()
         {
             using(var db = new ProductsDBContext())
             {
-                return await db.Products.ToListAsync();
+                return await db.Users.ToListAsync();
             }
         }
 
-        internal async static Task<Product> GetProductById(int productID)
+        internal async static Task<User> GetUserById(int productID)
         {
             using (var db = new ProductsDBContext())
             {
-                return await db.Products.FirstOrDefaultAsync( product => product.Id == productID);
+                return await db.Users.FirstOrDefaultAsync( product => product.Id == productID);
             }
         }
 
-        internal async static Task<bool> CreateProductAsync(Product productToCreate)
+        internal async static Task<bool> CreateUserAsync(User userToCreate)
         {
             using (var db = new ProductsDBContext())
             {
                 try
                 {
-                    await db.Products.AddAsync(productToCreate);
+                    await db.Users.AddAsync(userToCreate);
 
                     return await db.SaveChangesAsync() >= 1;
                 }
                 catch(Exception e)
                 {
+                    
                     return false;
                 }
             }
         }
 
-        internal async static Task<bool> UpdateProductAsync(Product productToUpdate)
+        internal async static Task<bool> UpdateUserAsync(User userToUpdate)
         {
             using (var db = new ProductsDBContext())
             {
                 try
                 {
-                    db.Products.Update(productToUpdate);
+                    db.Users.Update(userToUpdate);
 
                     return await db.SaveChangesAsync() >= 1;
                 }
@@ -58,20 +59,35 @@ namespace ECommerceWebApp.Data
             }
         }
 
-        internal async static Task<bool> DeleteProductAsync(int productId)
+        internal async static Task<bool> DeleteUserAsync(int userId)
         {
             using (var db = new ProductsDBContext())
             {
                 try
                 {
-                    Product productToDelete = await GetProductById(productId);
-                    db.Products.Remove(productToDelete);
+                    User userToDelete = await GetUserById(userId);
+                    db.Users.Remove(userToDelete);
 
                     return await db.SaveChangesAsync() >= 1;
                 }
                 catch (Exception e)
                 {
                     return false;
+                }
+            }
+        }
+
+        internal async static Task<User> FindUserAsync(UserDTO userToFind)
+        {
+            using (var db = new ProductsDBContext())
+            {
+                try
+                {
+                    return await db.Users.FirstOrDefaultAsync(user => user.Username == userToFind.Username);
+                }
+                catch (Exception e)
+                {
+                    return null;
                 }
             }
         }

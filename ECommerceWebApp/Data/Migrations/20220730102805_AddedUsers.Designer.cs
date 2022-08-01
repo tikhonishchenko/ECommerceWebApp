@@ -3,14 +3,16 @@ using System;
 using ECommerceWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerceWebApp.Data.Migrations
 {
     [DbContext(typeof(ProductsDBContext))]
-    partial class ProductsDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220730102805_AddedUsers")]
+    partial class AddedUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,27 +100,12 @@ namespace ECommerceWebApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CartSave")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
-
                     b.Property<byte[]>("Password")
                         .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<byte[]>("PasswordKey")
-                        .IsRequired()
-                        .HasColumnType("BLOB");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -129,13 +116,13 @@ namespace ECommerceWebApp.Data.Migrations
             modelBuilder.Entity("ECommerceWebApp.Model.Product", b =>
                 {
                     b.HasOne("ECommerceWebApp.Model.User", null)
-                        .WithMany("products")
+                        .WithMany("Cart")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ECommerceWebApp.Model.User", b =>
                 {
-                    b.Navigation("products");
+                    b.Navigation("Cart");
                 });
 #pragma warning restore 612, 618
         }
