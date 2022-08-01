@@ -21,7 +21,7 @@ namespace ECommerceWebApp.Controllers
     public class LoginController : ControllerBase
     {
         private IConfiguration _config;
-        private User activeUser;
+        private User activeUser { get; set; }
 
         public LoginController(IConfiguration config)
         {
@@ -54,7 +54,6 @@ namespace ECommerceWebApp.Controllers
         }
         [AllowAnonymous]
         [HttpGet("registerAdmin/{username}/{password}")]
-        
         public async Task<IActionResult> RegisterAdminAsync(string username, string password)
         {
             UserDTO user = new UserDTO
@@ -79,8 +78,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("login/{username}/{password}")]
-        
+        [HttpGet("login/{username}/{password}")]  
         public async Task<IActionResult> LoginAsync(string username, string password)
         {
             UserDTO user = new UserDTO
@@ -128,6 +126,7 @@ namespace ECommerceWebApp.Controllers
             return Ok($"this is anon panel and you are {GetCurrentUser().Username}");
         }
 
+        
         private User GetCurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

@@ -19,7 +19,7 @@ namespace ECommerceWebApp.Model
         
         [Required, MaxLength(1000)]
         public string CartSave { get; set; } = string.Empty;
-        public List<Product> products { get; set; } = new List<Product>();
+        public List<Product> productsInCart { get; set; } = new List<Product>();
 
 
         [NotMapped]
@@ -27,7 +27,7 @@ namespace ECommerceWebApp.Model
 
         public void AddProductToCart(Product product)
         {
-            products.Add(product);
+            productsInCart.Add(product);
             if(CartSave != string.Empty)
             {
                 CartSave += "," + product.Id;
@@ -40,11 +40,11 @@ namespace ECommerceWebApp.Model
 
         public bool RemoveProductFromCart(Product product)
         {
-            if(products.Count > 0)
+            if(productsInCart.Count > 0)
             {
-                if (products.Contains(product))
+                if (productsInCart.Contains(product))
                 {
-                    products.Remove(product);
+                    productsInCart.Remove(product);
                     CartSave.Remove(product.Id);
                     if(CartSave.Length > 0)
                     {
