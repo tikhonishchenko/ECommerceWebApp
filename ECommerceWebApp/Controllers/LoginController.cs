@@ -30,7 +30,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("registerUser/{username}/{password}")]
+        [HttpGet("register-user/{username}/{password}")]
         public async Task<IActionResult> RegisterUserAsync(string username, string password)
         {
             UserDTO user = new UserDTO
@@ -60,8 +60,9 @@ namespace ECommerceWebApp.Controllers
             }
             return BadRequest("Invalid client request");
         }
+        
         [AllowAnonymous]
-        [HttpGet("registerAdmin/{username}/{password}")]
+        [HttpGet("register-admin/{username}/{password}")]
         public async Task<IActionResult> RegisterAdminAsync(string username, string password)
         {
             UserDTO user = new UserDTO
@@ -126,29 +127,33 @@ namespace ECommerceWebApp.Controllers
         }
 
 
-       
-
         [Authorize]
-        [HttpGet("showUser")]
+        [HttpGet("show-user")]
         public IActionResult ShowUser()
         {
             return Ok("Welcome to los pollos hermanos!");
         }
 
         [Authorize(Roles="Admin")]
-        [HttpGet("showAdmin")]
+        [HttpGet("show-admin")]
         public IActionResult ShowAdmin()
         {
             return Ok("You can call me gus");
         }
 
         [AllowAnonymous]
-        [HttpGet("showAnon")]
+        [HttpGet("show-anon")]
         public IActionResult ShowNobody()
         {
             return Ok($"this is anon panel and you are {GetCurrentUser().Username}");
         }
-
+        [Authorize]
+        [HttpPut("update-user")]
+        public async Task<IActionResult> UpdateUserAsync(User user)
+        {
+            await UserRepository.UpdateUserAsync(user);
+            return Ok("User updated");
+        }
         
         private User GetCurrentUser()
         {

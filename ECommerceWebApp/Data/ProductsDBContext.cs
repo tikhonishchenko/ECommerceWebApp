@@ -21,6 +21,7 @@ namespace ECommerceWebApp.Data
                     Id = i,
                     IdString = "000000"+i,
                     Name = "Product "+i,
+                    Category = "Product",
                     Description = "Description of product " + i,
                     imageUrl = "https://web.dev/easy-high-dpi-images/",
                     Price = i*1.11m

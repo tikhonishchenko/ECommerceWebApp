@@ -35,7 +35,7 @@ namespace ECommerceWebApp.Controllers
             return Ok(products);
         }
 
-        [HttpGet("products/{id}")]
+        [HttpGet("product-by-id/{id}")]
         public async Task<ActionResult<List<Product>>> GetProductById(string id)
         {
 
@@ -44,7 +44,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize]
-        [HttpPost("cleanCart")]
+        [HttpPost("clean-cart")]
         public async Task<IActionResult> CleanCart(string id)
         {
             CheckUser();
@@ -55,7 +55,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize]
-        [HttpPost("addToCart/{id}")]
+        [HttpPost("add-to-cart/{id}")]
         public async Task<IActionResult> AddToCartAsync(string id)
         {
             CheckUser();
@@ -67,7 +67,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize]
-        [HttpPost("removeFromCart/{id}")]
+        [HttpPost("remove-from-cart/{id}")]
         public async Task<IActionResult> RemoveFromCartAsync(string id)
         {
             CheckUser();
@@ -79,7 +79,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize]
-        [HttpPost("removeOneFromCart/{id}")]
+        [HttpPost("remove-one-from-cart/{id}")]
         public async Task<IActionResult> RemoveOneFromCartAsync(string id)
         {
             CheckUser();
@@ -99,14 +99,14 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize]
-        [HttpGet("getCart")]
+        [HttpGet("get-cart")]
         public IActionResult GetCart()
         {
             CheckUser();
             return Ok(activeUser.getCartAsync());
         }
         [Authorize]
-        [HttpGet("getUser")]
+        [HttpGet("get-user")]
         public IActionResult GetUser()
         {
             CheckUser();
@@ -114,7 +114,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("addProduct")]
+        [HttpPost("add-product")]
         public async Task<IActionResult> AddProduct(Product product)
         {
             await ProductsRepository.CreateProductAsync(product);
@@ -122,7 +122,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("updateProduct")]
+        [HttpPut("update-product")]
         public async Task<IActionResult> UpdateProduct(Product product)
         {
             await ProductsRepository.UpdateProductAsync(product);
@@ -130,29 +130,29 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("deleteProduct")]
+        [HttpDelete("delete-product")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
             await ProductsRepository.DeleteProductAsync(id);
             return Ok();
         }
-        [HttpGet("findProduct/{searchTerm}")]
+        [HttpGet("find-product/{searchTerm}")]
         public async Task<IActionResult> FindProductByName(string searchTerm)
         {
             return Ok(await ProductsRepository.GetProductByName(searchTerm));
         }
-        [HttpGet("findProductByCategory/{category}")]
+        [HttpGet("find-product-by-category/{category}")]
         public async Task<IActionResult> FindProductByCategory(string category)
         {
             return Ok(await ProductsRepository.GetProductByCategory(category));
         }
-        [HttpGet("findProductByPrice/{startPrice}/{endPrice}")]
+        [HttpGet("find-product-by-price/{startPrice}/{endPrice}")]
         public async Task<IActionResult> FindProductByPrice(decimal startPrice, decimal endPrice)
         {
             return Ok(await ProductsRepository.GetProductsByPriceAsync(startPrice, endPrice));
         }
-        [HttpGet("findProductByParams")]
-        public async Task<IActionResult> FindProductByPrice(SearchTerm searchTerm)
+        [HttpGet("find-product-by-params")]
+        public async Task<IActionResult> FindProductByParams(SearchTerm searchTerm)
         {
             return Ok(await ProductsRepository.GetProductBySearchTermAsync(searchTerm));
         }
