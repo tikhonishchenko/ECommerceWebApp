@@ -85,6 +85,14 @@ namespace ECommerceWebApp.Controllers
             return BadRequest("Invalid client request");
         }
 
+        [Authorize]
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return BadRequest("You are logged out!");
+        }
+
         [AllowAnonymous]
         [HttpGet("login/{username}/{password}")]  
         public async Task<IActionResult> LoginAsync(string username, string password)
