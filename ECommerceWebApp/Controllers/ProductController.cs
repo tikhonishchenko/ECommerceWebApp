@@ -130,7 +130,7 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("delete-product")]
+        [HttpDelete("delete-product/{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
             await ProductsRepository.DeleteProductAsync(id);

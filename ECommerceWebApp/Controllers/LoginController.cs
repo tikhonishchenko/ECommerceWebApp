@@ -121,7 +121,7 @@ namespace ECommerceWebApp.Controllers
                         return Ok(HttpContext.User);
                     }
                 }
-                return Unauthorized();
+                return Ok("no user");
             }
             return BadRequest("Invalid client request");
         }

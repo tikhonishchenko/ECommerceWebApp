@@ -38,6 +38,17 @@ namespace ECommerceWebApp
                     options.LogoutPath = "/api/login/logout";
                 });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .WithOrigins("http://localhost:3000", "https://salmon-beach-032f55210.1.azurestaticapps.net");
+                    });
+            });
 
             //services.AddMvc();
             services.AddHttpClient();
@@ -60,6 +71,8 @@ namespace ECommerceWebApp
             };
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 
