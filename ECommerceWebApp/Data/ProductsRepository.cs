@@ -20,7 +20,7 @@ namespace ECommerceWebApp.Data
         {
             using (var db = new ProductsDBContext())
             {
-                return await db.Products.FirstOrDefaultAsync( product => product.Id.Equals(productID));
+                return await db.Products.FirstOrDefaultAsync( product => product.IdString.Equals(productID));
             }
         }
 

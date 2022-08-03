@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -28,21 +31,14 @@ namespace ECommerceWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie()
-                .AddJwtBearer("refresh-token",options =>
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
                 {
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-
-                    };
+                    options.LoginPath = "/api/login/login";
+                    options.LogoutPath = "/api/login/logout";
                 });
+
+
             //services.AddMvc();
             services.AddHttpClient();
             services.AddControllers();
@@ -56,6 +52,13 @@ namespace ECommerceWebApp
                 app.UseDeveloperExceptionPage();
             }
 
+            var cookiePolicyOptions = new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+                Secure = CookieSecurePolicy.Always,
+                HttpOnly = HttpOnlyPolicy.Always                              
+            };
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -63,6 +66,8 @@ namespace ECommerceWebApp
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseCookiePolicy(cookiePolicyOptions);
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,5 +1,7 @@
 ﻿using ECommerceWebApp.Data;
 using ECommerceWebApp.Model;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +24,6 @@ namespace ECommerceWebApp.Controllers
     public class LoginController : ControllerBase
     {
         private IConfiguration _config;
-        private User activeUser { get; set; }
-
         public LoginController(IConfiguration config)
         {
             _config = config;
@@ -31,7 +31,6 @@ namespace ECommerceWebApp.Controllers
 
         [AllowAnonymous]
         [HttpGet("registerUser/{username}/{password}")]
-        
         public async Task<IActionResult> RegisterUserAsync(string username, string password)
         {
             UserDTO user = new UserDTO
@@ -41,14 +40,22 @@ namespace ECommerceWebApp.Controllers
             };
             if (user != null)
             {
-                User userObj = user.GenerateUser();
-                if (await UserRepository.CreateUserAsync(userObj))
+                if (await UserRepository.FindUserAsync(user) == null)
                 {
-                    return Ok(userObj);
+                    User userObj = user.GenerateUser();
+
+                    if (await UserRepository.CreateUserAsync(userObj))
+                    {
+                        return Ok(userObj);
+                    }
+                    else
+                    {
+                        return BadRequest("Can't add to database");
+                    }
                 }
                 else
                 {
-                    return BadRequest("Invalid client request2");
+                    return BadRequest("user already exist");
                 }
             }
             return BadRequest("Invalid client request");
@@ -95,13 +102,10 @@ namespace ECommerceWebApp.Controllers
                 {
                     if (user.CheckPassword(foundUser.Password, foundUser.PasswordKey))
                     {
-                        var token = CreateToken(foundUser);
-                        activeUser = foundUser;
+                        //authorization
+                        CreateTokenAsync(foundUser);
 
-                        var refreshToken = GenerateRefreshToken(token);
-                        SetRefreshToken(refreshToken);
-
-                        return Ok(token);
+                        return Ok(HttpContext.User);
                     }
                 }
                 return Unauthorized();
@@ -109,31 +113,8 @@ namespace ECommerceWebApp.Controllers
             return BadRequest("Invalid client request");
         }
 
-        private void SetRefreshToken(RefreshToken refreshToken)
-        {
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = refreshToken.Expires
-            };
-            Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
-
-            activeUser.WebToken = refreshToken.Token;
-        }
 
        
-
-        private RefreshToken GenerateRefreshToken(string token)
-        {
-            var refreshToken = new RefreshToken
-            {
-                Token = token,
-                Expires = DateTime.Now.AddDays(7),
-                Created = DateTime.Now
-            };
-
-            return refreshToken;
-        }
 
         [Authorize]
         [HttpGet("showUser")]
@@ -173,28 +154,46 @@ namespace ECommerceWebApp.Controllers
 
             return null;
         }
-        private string CreateToken(User user)
+        private async void CreateTokenAsync(User user)
         {
-            List<Claim> claims = new List<Claim>
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, user.Role),
                 new Claim(ClaimTypes.Surname, user.CartSave)
             };
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value));
 
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            var token = new JwtSecurityToken(
-                _config["Jwt:Issuer"],
-                _config["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds);
+            var authProperties = new AuthenticationProperties
+            {
+                AllowRefresh = true,
+                // Refreshing the authentication session should be allowed.
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7),
+                // The time at which the authentication ticket expires. A 
+                // value set here overrides the ExpireTimeSpan option of 
+                // CookieAuthenticationOptions set with AddCookie.
 
-            return jwt;
+                IsPersistent = true,
+                // Whether the authentication session is persisted across 
+                // multiple requests. When used with cookies, controls
+                // whether the cookie's lifetime is absolute (matching the
+                // lifetime of the authentication ticket) or session-based.
+
+                IssuedUtc = DateTime.UtcNow,
+                // The time at which the authentication ticket was issued.
+
+                //RedirectUri = <string>
+                // The full path or absolute URI to be used as an http 
+                // redirect response value.
+            };
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
         }
     }
 }

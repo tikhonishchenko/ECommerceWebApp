@@ -18,7 +18,8 @@ namespace ECommerceWebApp.Data
             {
                 productsToSeed[i-1] = new Product
                 {
-                    Id = "000000"+i,
+                    Id = i,
+                    IdString = "000000"+i,
                     Name = "Product "+i,
                     Description = "Description of product " + i,
                     imageUrl = "https://web.dev/easy-high-dpi-images/",

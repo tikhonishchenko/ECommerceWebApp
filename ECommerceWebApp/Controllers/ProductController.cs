@@ -45,14 +45,50 @@ namespace ECommerceWebApp.Controllers
         }
 
         [Authorize]
+        [HttpPost("cleanCart")]
+        public async Task<IActionResult> CleanCart(string id)
+        {
+            CheckUser();
+
+            activeUser.CleanCart();
+
+            return Ok(activeUser.CartSave);
+        }
+
+        [Authorize]
         [HttpPost("addToCart/{id}")]
         public async Task<IActionResult> AddToCartAsync(string id)
         {
             CheckUser();
             Product productToAdd = await ProductsRepository.GetProductById(id);
+            
             activeUser.AddProductToCart(productToAdd);
             
-            return Ok(activeUser.getCartAsync());
+            return Ok(activeUser.CartSave);
+        }
+
+        [Authorize]
+        [HttpPost("removeFromCart/{id}")]
+        public async Task<IActionResult> RemoveFromCartAsync(string id)
+        {
+            CheckUser();
+            Product productToRemove = await ProductsRepository.GetProductById(id);
+
+            activeUser.removeProductString(productToRemove.IdString);
+
+            return Ok(activeUser.CartSave);
+        }
+
+        [Authorize]
+        [HttpPost("removeOneFromCart/{id}")]
+        public async Task<IActionResult> RemoveOneFromCartAsync(string id)
+        {
+            CheckUser();
+            Product productToRemove = await ProductsRepository.GetProductById(id);
+
+            activeUser.removeOneFromProduct(productToRemove.IdString);
+
+            return Ok(activeUser.CartSave);
         }
 
         private void CheckUser()
@@ -77,7 +113,7 @@ namespace ECommerceWebApp.Controllers
             CheckUser();
             return Ok(activeUser);
         }
-
+        
 
 
         private User GetCurrentUser()
