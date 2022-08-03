@@ -18,6 +18,8 @@ namespace ECommerceWebApp.Model
         [Required, MaxLength(100)]
         public string imageUrl { get; set; }
         [Required]
+        public string Category { get; set; }
+        [Required]
         public decimal Price { get; set; }
         [Required]
         public int Quantity { get; set; } = 1;

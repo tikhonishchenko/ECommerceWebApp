@@ -97,6 +97,10 @@ namespace ECommerceWebApp.Controllers
         [HttpGet("login/{username}/{password}")]  
         public async Task<IActionResult> LoginAsync(string username, string password)
         {
+            if (GetCurrentUser() != null)
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            }
             UserDTO user = new UserDTO
             {
                 Username = username,

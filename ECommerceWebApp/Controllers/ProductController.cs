@@ -23,8 +23,7 @@ namespace ECommerceWebApp.Controllers
 
         public ProductController(IConfiguration config)
         {
-            _config = config;
-            
+            _config = config;     
         }
 
 
@@ -46,7 +45,7 @@ namespace ECommerceWebApp.Controllers
 
         [Authorize]
         [HttpPost("cleanCart")]
-        public async Task<IActionResult> CleanCart(string id)
+        public Task<IActionResult> CleanCart(string id)
         {
             CheckUser();
 
@@ -113,7 +112,51 @@ namespace ECommerceWebApp.Controllers
             CheckUser();
             return Ok(activeUser);
         }
-        
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("addProduct")]
+        public async Task<IActionResult> AddProduct(Product product)
+        {
+            await ProductsRepository.CreateProductAsync(product);
+            return Ok(product);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("updateProduct")]
+        public async Task<IActionResult> UpdateProduct(Product product)
+        {
+            await ProductsRepository.UpdateProductAsync(product);
+            return Ok(product);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("deleteProduct")]
+        public async Task<IActionResult> DeleteProduct(string id)
+        {
+            await ProductsRepository.DeleteProductAsync(id);
+            return Ok();
+        }
+        [HttpGet("findProduct/{searchTerm}")]
+        public async Task<IActionResult> FindProductByName(string searchTerm)
+        {
+            return Ok(await ProductsRepository.GetProductByName(searchTerm));
+        }
+        [HttpGet("findProductByCategory/{category}")]
+        public async Task<IActionResult> FindProductByCategory(string category)
+        {
+            return Ok(await ProductsRepository.GetProductByCategory(category));
+        }
+        [HttpGet("findProductByPrice/{startPrice}/{endPrice}")]
+        public async Task<IActionResult> FindProductByPrice(decimal startPrice, decimal endPrice)
+        {
+            return Ok(await ProductsRepository.GetProductsByPriceAsync(startPrice, endPrice));
+        }
+        [HttpGet("findProductByParams")]
+        public async Task<IActionResult> FindProductByPrice(SearchTerm searchTerm)
+        {
+            return Ok(await ProductsRepository.GetProductBySearchTermAsync(searchTerm));
+        }
+
 
 
         private User GetCurrentUser()
