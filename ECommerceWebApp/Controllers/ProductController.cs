@@ -45,7 +45,7 @@ namespace ECommerceWebApp.Controllers
 
         [Authorize]
         [HttpPost("cleanCart")]
-        public Task<IActionResult> CleanCart(string id)
+        public async Task<IActionResult> CleanCart(string id)
         {
             CheckUser();
 
