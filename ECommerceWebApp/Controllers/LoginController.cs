@@ -118,7 +118,7 @@ namespace ECommerceWebApp.Controllers
                         //authorization
                         CreateTokenAsync(foundUser);
 
-                        return Ok(HttpContext.User);
+                        return Ok(foundUser);
                     }
                 }
                 return Ok("no user");
@@ -131,7 +131,7 @@ namespace ECommerceWebApp.Controllers
         [HttpGet("show-user")]
         public IActionResult ShowUser()
         {
-            return Ok("Welcome to los pollos hermanos!");
+            return Ok(HttpContext.User);
         }
 
         [Authorize(Roles="Admin")]
@@ -145,7 +145,7 @@ namespace ECommerceWebApp.Controllers
         [HttpGet("show-anon")]
         public IActionResult ShowNobody()
         {
-            return Ok($"this is anon panel and you are {GetCurrentUser().Username}");
+            return Ok(GetCurrentUser());
         }
         [Authorize]
         [HttpPut("update-user")]

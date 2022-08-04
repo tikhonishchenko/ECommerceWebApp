@@ -22,8 +22,6 @@ namespace ECommerceWebApp.Model
 
         [Required, MaxLength(1000)]
         public string CartSave { get; set; } = string.Empty;
-        public string WebToken { get; set; } = string.Empty;
-        public DateTime WebTokenExpires { get; set; }
 
         public void AddProductToCart(Product product)
         {

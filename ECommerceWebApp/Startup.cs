@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace ECommerceWebApp
                 {
                     options.LoginPath = "/api/login/login";
                     options.LogoutPath = "/api/login/logout";
+                    options.Cookie.Name = "UserLoginCookie";
                 });
 
             services.AddCors(options =>
@@ -46,10 +48,10 @@ namespace ECommerceWebApp
                         builder
                             .AllowAnyMethod()
                             .AllowAnyHeader()
-                            .WithOrigins("http://localhost:3000", "https://salmon-beach-032f55210.1.azurestaticapps.net");
+                            .AllowCredentials()
+                            .WithOrigins("https://localhost:3000", "https://salmon-beach-032f55210.1.azurestaticapps.net");
                     });
             });
-
             //services.AddMvc();
             services.AddHttpClient();
             services.AddControllers();
@@ -65,7 +67,7 @@ namespace ECommerceWebApp
 
             var cookiePolicyOptions = new CookiePolicyOptions
             {
-                MinimumSameSitePolicy = SameSiteMode.Strict,
+                MinimumSameSitePolicy = SameSiteMode.None,
                 Secure = CookieSecurePolicy.Always,
                 HttpOnly = HttpOnlyPolicy.Always                              
             };

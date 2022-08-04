@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
-import Constants from './utils/Constants';
-
-
+import Constants from '../utils/Constants';
 
 export default function App() {
   const [products, setProducts] = useState([]);
 
+//#region functions
   function getProducts() {
     const url = Constants.API_URL_GET_ALL_PRODUCTS;
 
@@ -23,7 +22,6 @@ export default function App() {
         alert(error);
       });
   }
-
   function deleteProduct(productId){
     const url = `${Constants.API_URL_DELETE_PRODUCT_BY_ID}/${productId}`;
 
@@ -40,25 +38,12 @@ export default function App() {
         alert(error);
       });
   }
-
-  function getUser() {
-    const url = Constants.API_URL_SHOW_USER;
-
-    fetch(url, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-      });
-  }
-
   function login(username, password) {
     const url = `${Constants.API_URL_LOGIN_USER}/${username}/${password}`;
 
     fetch(url, {
       method: "GET",
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((productsFromServer) => {
@@ -69,19 +54,57 @@ export default function App() {
         alert(error);
       });
   }
+  function logout() {
+    const url = `${Constants.API_URL_LOGOUT_USER}`;
 
+    fetch(url, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => response.status)
+      .then((productsFromServer) => {
+        console.log(productsFromServer);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+  }
+  function getUser() {
+    const url = `${Constants.API_URL_GET_USER}`;
 
+    fetch(url, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((productsFromServer) => {
+        console.log(productsFromServer);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+  }
+  function addToCart(id) {
+    const url = `${Constants.API_URL_ADD_TO_CART}/${id}`;
 
+    fetch(url, {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((response) => response.statusText)
+      .then((productsFromServer) => {
+        console.log(productsFromServer);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+  }
+//#endregion
 
-  return (
-    <div>
-      <button className="btn btn-primary" onClick={getProducts}>Refresh</button>
-      <button className="btn btn-primary" onClick={() => {login("lol","12345")}}>login</button>
-      {renderProductsTable()}
-    </div>
-  );
-
-
+//#region renderers
 
   function renderProductsTable() {
     return (
@@ -119,5 +142,18 @@ export default function App() {
       </div>
     );
   }
+//#endregion
 
+
+
+return (
+  <div>
+    <button className="btn btn-primary" onClick={getProducts}>Refresh</button>
+    <button className="btn btn-primary" onClick={() => {login("lol","12345")}}>login</button>
+    <button className="btn btn-primary" onClick={() => {logout()}}>logout</button>
+    <button className="btn btn-primary" onClick={() => {getUser()}}>get user</button>
+    <button className="btn btn-primary" onClick={() => {addToCart("0000002")}}>add to cart</button>
+    {renderProductsTable()}
+  </div>
+);
 }

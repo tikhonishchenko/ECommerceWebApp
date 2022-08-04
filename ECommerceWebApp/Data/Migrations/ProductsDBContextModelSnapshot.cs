@@ -143,12 +143,6 @@ namespace ECommerceWebApp.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("WebToken")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("WebTokenExpires")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
                     b.ToTable("Users");

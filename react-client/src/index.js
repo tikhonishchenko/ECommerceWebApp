@@ -1,8 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+    App,
+    Footer,
+    Home,
+    Header,
+  } from "./components";
+  
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+ReactDOM.render(
+    <Router>
+        <Header />
+            <Routes>
+                <Route path='/' element={<Home />}></Route>
+                <Route path='/app' element={<App />}></Route>
+            </Routes>
+        <Footer />
+    </Router>,
+    
+    
+    document.getElementById('root')
+    );
 
