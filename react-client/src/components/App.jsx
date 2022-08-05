@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './CSS/App.css';
 import Constants from '../utils/Constants';
 
 export default function App() {
@@ -38,22 +38,7 @@ export default function App() {
         alert(error);
       });
   }
-  function login(username, password) {
-    const url = `${Constants.API_URL_LOGIN_USER}/${username}/${password}`;
 
-    fetch(url, {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((response) => response.json())
-      .then((productsFromServer) => {
-        console.log(productsFromServer);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-      });
-  }
   function logout() {
     const url = `${Constants.API_URL_LOGOUT_USER}`;
 
@@ -149,7 +134,6 @@ export default function App() {
 return (
   <div>
     <button className="btn btn-primary" onClick={getProducts}>Refresh</button>
-    <button className="btn btn-primary" onClick={() => {login("lol","12345")}}>login</button>
     <button className="btn btn-primary" onClick={() => {logout()}}>logout</button>
     <button className="btn btn-primary" onClick={() => {getUser()}}>get user</button>
     <button className="btn btn-primary" onClick={() => {addToCart("0000002")}}>add to cart</button>

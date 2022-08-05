@@ -1,11 +1,11 @@
 import React from "react";
-import './App.css';
+import './CSS/App.css'
 
 function Footer() {
   return (
-    <div class="footer">
-    <p>Footer</p>
-    </div>
+    <footer>
+      <p>this is footer</p>
+    </footer>
   );
 }
 

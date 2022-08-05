@@ -7,15 +7,18 @@ import {
     Footer,
     Home,
     Header,
+    Login,
   } from "./components";
   
 
 ReactDOM.render(
+
     <Router>
         <Header />
             <Routes>
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/app' element={<App />}></Route>
+                <Route path='/login' element={<Login />}></Route>
             </Routes>
         <Footer />
     </Router>,

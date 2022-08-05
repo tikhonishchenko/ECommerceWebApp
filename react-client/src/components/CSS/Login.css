@@ -1,0 +1,49 @@
+.login{
+    text-align:center;
+  }
+  
+  .login form{
+    margin: auto;
+  }
+  
+  .login form input{
+    height: 30%;
+    padding: 10px 10px;
+    border: 3px  solid rgb(224, 224, 224);
+    transition: all .5s;
+  }
+  
+  .login form input:focus{
+    height: 30%;
+    padding: 10px 10px;
+    border: 3px  solid rgb(0, 0, 0);
+    transition: all .5s;
+  }
+  
+  .login form:focus, input:focus, button:focus{
+    outline: none;
+  }
+  
+  .login form a{
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    font-size: large;
+  }
+  .login form button{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bolder;
+    font-size: large;
+    padding: 10px 10px;
+    border: 3px  solid rgb(224, 224, 224);
+    transition: all .5s;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .login form button:hover{
+    padding: 10px 10px;
+    border: 3px  solid rgb(0, 0, 0);
+    transition: all .5s;
+    font-family: 'Josefin Sans', sans-serif;
+    cursor:pointer;
+  }

@@ -1,0 +1,81 @@
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+}
+
+
+ul.topnav li  { 
+  box-shadow: 0 5px 5px 0 rgb(145, 145, 145);
+  float: left;
+}
+
+ul.topnav{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+}
+
+ul.topnav li a {
+  display: block;
+  border: 1px solid black;
+  color: black;
+  text-align: center;
+  padding: 14px;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color .35s;
+  transition: color .35s;
+
+}
+hr{
+  border: 1px solid black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: all .35s;
+  box-shadow: 0 2px 3px 0 rgb(145, 145, 145);
+}
+#top{
+  display: flex;
+  justify-content: space-between;
+}
+#logo{
+  display: block;
+  margin-left: 47%;
+  width: 70%;
+  max-height: 100px;
+  max-width: 100px;
+}
+#top #login{
+  float: right;
+  margin-top: 25px;
+  max-width: 30px;
+  max-height: 30px;
+}
+ul.topnav li a:hover:not(.active) {
+  background-color: black;
+  color: white;
+  transition: all .35s;
+}
+
+ul.topnav li a.active {background-color: #04AA6D;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+  ul.topnav{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  
+  }
+}
