@@ -8,8 +8,10 @@ namespace ECommerceWebApp.Model
     public class UserDTO
     {
         //public int Id { get; set; }
+        public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Role { get; set; }
 
         internal User GenerateUser()
         {
@@ -17,30 +19,17 @@ namespace ECommerceWebApp.Model
             User newUser = new User
             {
                 Username = Username,
+                Email = Email,
                 Password = passwordHash,
                 PasswordKey = passwordSalt,
-                Role = "User",
+                Role = Role,
                 CartSave = String.Empty,
                 //productsInCart = new List<Product>()
 
             };
             return newUser;
         }
-        internal User GenerateAdmin()
-        {
-            CreatePasswordHash(Password, out byte[] passwordHash, out byte[] passwordSalt);
-            User newUser = new User
-            {
-                Username = Username,
-                Password = passwordHash,
-                PasswordKey = passwordSalt,
-                Role = "Admin",
-                CartSave = String.Empty,
-                //productsInCart = new List<Product>()
 
-            };
-            return newUser;
-        }
         internal bool CheckPassword( byte[] passwordHash, byte[] passwordSalt)
         {
             return VerifyPasswordHash(Password, passwordHash, passwordSalt);

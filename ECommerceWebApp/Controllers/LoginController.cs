@@ -30,23 +30,18 @@ namespace ECommerceWebApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("register-user/{username}/{password}")]
-        public async Task<IActionResult> RegisterUserAsync(string username, string password)
+        [HttpPost("register-user")]
+        public async Task<IActionResult> RegisterUserAsync(UserDTO user)
         {
-            UserDTO user = new UserDTO
-            {
-                Username = username,
-                Password = password
-            };
+            
             if (user != null)
             {
-                if (await UserRepository.FindUserAsync(user) == null)
+                if (await UserRepository.FindUserAsync(user.Username) == null)
                 {
                     User userObj = user.GenerateUser();
-
                     if (await UserRepository.CreateUserAsync(userObj))
                     {
-                        return Ok(userObj);
+                        return Ok(user);
                     }
                     else
                     {
@@ -60,7 +55,7 @@ namespace ECommerceWebApp.Controllers
             }
             return BadRequest("Invalid client request");
         }
-        
+        /*
         [AllowAnonymous]
         [HttpGet("register-admin/{username}/{password}")]
         public async Task<IActionResult> RegisterAdminAsync(string username, string password)
@@ -85,7 +80,7 @@ namespace ECommerceWebApp.Controllers
             }
             return BadRequest("Invalid client request");
         }
-
+        */
         [Authorize]
         [HttpGet("logout")]
         public async Task<IActionResult> Logout()
@@ -107,7 +102,7 @@ namespace ECommerceWebApp.Controllers
             
             if (user != null)
             {
-                User foundUser = await  UserRepository.FindUserAsync(user);
+                User foundUser = await  UserRepository.FindUserAsync(user.Username);
                 if (foundUser != null)
                 {
                     if (user.CheckPassword(foundUser.Password, foundUser.PasswordKey))

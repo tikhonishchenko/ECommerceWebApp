@@ -1,0 +1,77 @@
+.login{
+    text-align:center;
+    align-items: center;
+  }
+  
+  .login form{
+    margin: auto;
+  }
+  
+  .login form input{
+    height: 30%;
+    padding: 10px 10px;
+    border: 3px  solid rgb(224, 224, 224);
+    transition: all .5s;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    font-size: large;
+    width: 15%;
+  }
+  
+  .login form input:focus{
+    height: 30%;
+    padding: 10px 10px;
+    border: 3px  solid rgb(0, 0, 0);
+    transition: all .5s;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    font-size: large;
+  }
+  
+  .login form:focus, input:focus, button:focus, select:focus{
+    outline: none;
+  }
+  
+  .login form a{
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    font-size: large;
+  }
+  .login form button{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bolder;
+    font-size: large;
+    padding: 10px 10px;
+    border: 3px  solid rgb(224, 224, 224);
+    transition: all .5s;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .login form button:hover{
+    padding: 10px 10px;
+    border: 3px  solid rgb(0, 0, 0);
+    transition: all .5s;
+    font-family: 'Josefin Sans', sans-serif;
+    cursor:pointer;
+  }
+
+  .login select{
+    border: 2px  solid rgb(0, 0, 0);
+    width: 16%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+
+  @media screen and (max-width: 600px) {
+    .login form input{
+
+      width: 40%;
+    }
+    .login select{
+      border: 2px  solid rgb(0, 0, 0);
+      width: 45%;
+    }
+  }

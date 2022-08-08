@@ -77,13 +77,13 @@ namespace ECommerceWebApp.Data
             }
         }
 
-        internal async static Task<User> FindUserAsync(UserDTO userToFind)
+        internal async static Task<User> FindUserAsync(string username)
         {
             using (var db = new ProductsDBContext())
             {
                 try
                 {
-                    return await db.Users.FirstOrDefaultAsync(user => user.Username == userToFind.Username);
+                    return await db.Users.FirstOrDefaultAsync(user => user.Username == username);
                 }
                 catch (Exception e)
                 {

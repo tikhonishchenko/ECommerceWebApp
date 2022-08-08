@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
-    App,
     Footer,
     Home,
     Header,
     Login,
+    Register,
+    Shop,
   } from "./components";
   
 
@@ -17,8 +18,9 @@ ReactDOM.render(
         <Header />
             <Routes>
                 <Route path='/' element={<Home />}></Route>
-                <Route path='/app' element={<App />}></Route>
                 <Route path='/login' element={<Login />}></Route>
+                <Route path='/register' element={<Register />}></Route>
+                <Route path='/shop' element={<Shop />}></Route>
             </Routes>
         <Footer />
     </Router>,

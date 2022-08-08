@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import "./CSS/App.css";
 import "./CSS/Login.css";
 import Constants from "../utils/Constants";
@@ -11,7 +12,7 @@ export default function Login(){
     });
 
     const [formData, setFormData] = useState(initialFormData);
-
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setFormData({
@@ -20,7 +21,7 @@ export default function Login(){
         });
     };
 
-    const handleSubmit = (event) => {
+    const HandleSubmit = (event) => {
         event.preventDefault();
 
         const user = {
@@ -29,7 +30,6 @@ export default function Login(){
         };
 
         const url = Constants.API_URL_LOGIN_USER;
-
         fetch(url, {
             method: 'POST',
             credentials: 'include',
@@ -43,12 +43,13 @@ export default function Login(){
           .then(responseFromServer => {
             console.log(user)
             console.log(responseFromServer);
+            navigate("/");
           })
           .catch((error) => {
             console.log(error)
             alert(error);
+
           });
-          //props.OnProductCreated(productToCreate);
     };
 
 //#endregion
@@ -61,7 +62,7 @@ export default function Login(){
                 <h2>Password</h2>
                 <input type="password" name="password" value={formData.password} onChange={handleChange} />
                 <h4></h4>
-                <button onClick={handleSubmit} >Login</button>
+                <button onClick={HandleSubmit} >Login</button>
                 <h4><a href="register" id="register">Haven't got an account? Register.</a></h4>
             </form>
         </div>

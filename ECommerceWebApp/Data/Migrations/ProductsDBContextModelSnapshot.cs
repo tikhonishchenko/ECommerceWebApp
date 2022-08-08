@@ -125,6 +125,10 @@ namespace ECommerceWebApp.Data.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<byte[]>("Password")
                         .IsRequired()
                         .HasColumnType("BLOB");

@@ -166,10 +166,7 @@ namespace ECommerceWebApp.Controllers
             if (identity != null)
             {
                 var userClaims = identity.Claims;
-                User userFound = UserRepository.FindUserAsync(new UserDTO
-                {
-                    Username = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
-                }).Result;
+                User userFound = UserRepository.FindUserAsync(userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value).Result;
                 return userFound;
             }
 

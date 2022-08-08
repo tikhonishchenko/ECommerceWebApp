@@ -14,6 +14,8 @@ namespace ECommerceWebApp.Model
         [Required, MaxLength(100)]
         public string Username { get; set; } = string.Empty;
         [Required]
+        public string Email { get; set; }
+        [Required]
         public byte[] Password { get; set; } = new byte[0];
         [Required]
         public byte[] PasswordKey { get; set; } = new byte[0];

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './CSS/App.css';
+import './CSS/Shop.css';
 import Constants from '../utils/Constants';
 
-export default function App() {
+export default function Shop() {
   const [products, setProducts] = useState([]);
 
 //#region functions
@@ -93,37 +94,15 @@ export default function App() {
 
   function renderProductsTable() {
     return (
-      <div className="table-responsive mt-5">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Image</th>
-              <th scope="col">Category</th>
-              <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
+      <div className="products">
             {products.map((product) => (
-              <tr key={product.id}>
-                <th>{product.idString}</th>
-                <td>{product.name}</td>
-                <td>{product.description}</td>
-                <td><img src={product.imageUrl}></img></td>
-                <td>{product.category}</td>
-                <td>{product.price}</td>
-                <td>{product.quantity}</td>
-                <td>
-                  {/*<button className="btn btn-primary" onClick={() => setProductCurrentlyBeingUpdated(product)}>Edit</button>*/}
-                  <button className="btn btn-danger" onClick={() => { if(window.confirm(`Are you sure you want to delete "${product.name}"?`)) deleteProduct(product.idString)}}>Delete</button>
-                </td>
-              </tr>
+              <div className="product" key={product.id}>
+                <img src="https://picsum.photos/200/300" />
+                <h1>{product.name}</h1>
+                <h4>{product.idString}</h4>
+                <h2>{product.price}₴</h2>
+              </div>
             ))}
-          </tbody>
-        </table>
       </div>
     );
   }
