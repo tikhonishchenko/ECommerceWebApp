@@ -13,6 +13,8 @@ export default function Login(){
 
     const [formData, setFormData] = useState(initialFormData);
     const navigate = useNavigate();
+    const [productData, setProductData] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const handleChange = (event) => {
         setFormData({

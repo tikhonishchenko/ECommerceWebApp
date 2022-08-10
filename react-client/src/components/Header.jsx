@@ -6,11 +6,11 @@ import './CSS/App.css';
 
 export default function Header(){
     return (
-      <div>
+      <div className="header">
         <div>
           <div id="top">
             <img src={logo} alt="logo" id="logo" />
-            <a href="login"><img src={account} alt="account" id="login" /></a>
+            <a href="/login"><img src={account} alt="account" id="login" /></a>
           </div>
 
           <hr className="trans--grow" />
@@ -18,9 +18,9 @@ export default function Header(){
         <div>
           <ul className="topnav">
             <li><a href="/">Home</a></li>
-            <li><a href="shop">Shop</a></li>
-            <li><a href="about">About</a></li>
-            <li><a href="app">App</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/app">App</a></li>
           </ul>
         </div>
       </div>

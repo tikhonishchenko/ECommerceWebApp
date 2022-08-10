@@ -81,6 +81,19 @@ namespace ECommerceWebApp.Controllers
             return BadRequest("Invalid client request");
         }
         */
+
+        [HttpPost("check-user")]
+        public IActionResult CheckUser()
+        {
+            if (HttpContext.User == null)
+            {
+                return BadRequest("You must login");
+            }
+            else
+            {
+                return Ok();
+            }
+        }
         [Authorize]
         [HttpGet("logout")]
         public async Task<IActionResult> Logout()
@@ -130,7 +143,7 @@ namespace ECommerceWebApp.Controllers
         [HttpGet("show-admin")]
         public IActionResult ShowAdmin()
         {
-            return Ok("You can call me gus");
+            return Ok(HttpContext.User);
         }
 
         [AllowAnonymous]

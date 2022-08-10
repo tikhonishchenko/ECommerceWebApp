@@ -9,6 +9,7 @@ import {
     Login,
     Register,
     Shop,
+    Details,
   } from "./components";
   
 
@@ -17,10 +18,12 @@ ReactDOM.render(
     <Router>
         <Header />
             <Routes>
+                
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>
                 <Route path='/shop' element={<Shop />}></Route>
+                <Route path='/details/:productId' element={<Details />}></Route>
             </Routes>
         <Footer />
     </Router>,

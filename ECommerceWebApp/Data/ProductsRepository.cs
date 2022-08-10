@@ -105,10 +105,10 @@ namespace ECommerceWebApp.Data
         {
             using (var db = new ProductsDBContext())
             {
-                return await db.Products.Where(product => (searchTerm.Name == null || product.Name.Contains(searchTerm.Name)) 
-                                                    && (searchTerm.Category == null || product.Category.Contains(searchTerm.Category)) 
+                return await db.Products.Where(product => (searchTerm.Name == "" || product.Name.ToLower().Contains(searchTerm.Name.ToLower()))
+                                                    && (searchTerm.Category == "" || product.Category.Contains(searchTerm.Category)) 
                                                     && product.Price >= searchTerm.MinPrice 
-                                                    && product.Price <= searchTerm.MaxPrice)
+                                                    && (searchTerm.MaxPrice == 0 || product.Price <= searchTerm.MaxPrice))
                                                     .ToListAsync();
             }
         }

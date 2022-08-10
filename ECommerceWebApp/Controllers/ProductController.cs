@@ -151,7 +151,7 @@ namespace ECommerceWebApp.Controllers
         {
             return Ok(await ProductsRepository.GetProductsByPriceAsync(startPrice, endPrice));
         }
-        [HttpGet("find-product-by-params")]
+        [HttpPost("find-product-by-params")]
         public async Task<IActionResult> FindProductByParams(SearchTerm searchTerm)
         {
             return Ok(await ProductsRepository.GetProductBySearchTermAsync(searchTerm));

@@ -17,27 +17,116 @@
     transform: scale(1.25);
   }
   
+  .details{
+    cursor:pointer;
+  }
   
   /* Add some padding inside the card container */
   .products {
     margin-top: 5%;
     display:flex;
-    width: 90%;
-    margin: 5% 5% 5% 5%;
+    width: 80%;
+    margin: 2% 10% 5% 10%;
     flex-flow: wrap;
-    justify-content: center;
+    justify-content: space-around;
   }
-  h2{
-    font-size: 30px;
+  .products h1{
+    font-size: 160%;
     font-weight: bolder;
   }
-  h2{
-    font-size: 28px;
+  .products h2{
+    font-size: 140%;
 
   }
-  h4{
-    font-size: 10px;
+  .products h4{
+    font-size: 100%;
     color: lightgray;
 
+  }
+  .search{
+    border: 3px solid black;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px 20px;
+    width: 80%;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+  }
+  .price-input{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+  }
+  .input-min, .input-max, #search{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 32px;
+    outline: none;
+    border: 2px solid black;
+    font-size: large;
+    
+  }
+  input[type="number"]::-webkit-inner-spin-button, 
+  input[type="number"]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+  }
+
+
+  .search button, .products button{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bolder;
+    font-size: large;
+    padding: 10px 10px;
+    border: 3px  solid rgb(224, 224, 224);
+    transition: all .5s;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  .search button:hover, .products button:hover{
+    padding: 10px 10px;
+    border: 3px  solid rgb(0, 0, 0);
+    transition: all .5s;
+    font-family: 'Josefin Sans', sans-serif;
+    cursor:pointer;
+  }
+
+  .products button{
+    margin-bottom: 15px;
+  }
+
+  .products img{
+    width: 100%;
+  }
+  @media screen and (max-width: 900px) {
+    .product {
+      width: 40%;
+      text-align: center;
+    }
+    .products {
+      display:flex;
+      width: 96%;
+      margin: 2% 2% 5% 2%;
+      flex-flow: wrap;
+      justify-content: space-around;
+    }
+    .search{
+      flex-flow: wrap;
+      display:block;
+      text-align: center;
+      width: 60%;
+      margin-left: 15%;
+      margin-right: 20%;
+    }
+    .price-input{
+      display: block;
+    }
   }
   

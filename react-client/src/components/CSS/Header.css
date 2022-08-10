@@ -1,4 +1,4 @@
-ul.topnav {
+.header ul.topnav {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -7,12 +7,12 @@ ul.topnav {
 }
 
 
-ul.topnav li  { 
+.header ul.topnav li  { 
   box-shadow: 0 5px 5px 0 rgb(145, 145, 145);
   float: left;
 }
 
-ul.topnav{
+.header ul.topnav{
   display: flex;
   flex-direction: row;
   justify-content:center;
@@ -21,7 +21,7 @@ ul.topnav{
   padding-bottom: 10px;
 }
 
-ul.topnav li a {
+.header ul.topnav li a {
   display: block;
   border: 1px solid black;
   color: black;
@@ -35,50 +35,50 @@ ul.topnav li a {
   transition: color .35s;
 
 }
-hr{
+.header hr{
   border: 1px solid black;
   margin-top: 10px;
   margin-bottom: 10px;
   transition: all .35s;
   box-shadow: 0 2px 3px 0 rgb(145, 145, 145);
 }
-#top{
+.header #top{
   display: flex;
   justify-content: space-between;
 }
-#logo{
+.header #logo{
   display: block;
   margin-left: 47%;
   width: 70%;
   max-height: 100px;
   max-width: 100px;
 }
-#top #login{
+.header #top #login{
   float: right;
   margin-top: 25px;
   max-width: 50px;
   max-height: 50px;
 }
-ul.topnav li a:hover:not(.active) {
+.header ul.topnav li a:hover:not(.active) {
   background-color: black;
   color: white;
   transition: all .35s;
 }
 
-ul.topnav li a.active {background-color: #04AA6D;}
+.header ul.topnav li a.active {background-color: #04AA6D;}
 
-ul.topnav li.right {float: right;}
+.header ul.topnav li.right {float: right;}
 
-@media screen and (max-width: 600px) {
-  ul.topnav li.right, 
-  ul.topnav li {float: none;}
-  ul.topnav{
+@media screen and (max-width: 900px) {
+  .header ul.topnav li.right, 
+  .header ul.topnav li {float: none;}
+  .header ul.topnav{
     display: block;
     margin-left: auto;
     margin-right: auto;
   
   }
-  #logo{
+  .header #logo{
     display: block;
     margin-left: 38%;
     width: 70%;
