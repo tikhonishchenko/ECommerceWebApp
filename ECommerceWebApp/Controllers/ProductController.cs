@@ -141,11 +141,6 @@ namespace ECommerceWebApp.Controllers
         {
             return Ok(await ProductsRepository.GetProductByName(searchTerm));
         }
-        [HttpGet("find-product-by-category/{category}")]
-        public async Task<IActionResult> FindProductByCategory(string category)
-        {
-            return Ok(await ProductsRepository.GetProductByCategory(category));
-        }
         [HttpGet("find-product-by-price/{startPrice}/{endPrice}")]
         public async Task<IActionResult> FindProductByPrice(decimal startPrice, decimal endPrice)
         {

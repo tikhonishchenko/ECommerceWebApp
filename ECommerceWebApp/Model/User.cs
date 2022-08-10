@@ -227,7 +227,11 @@ namespace ECommerceWebApp.Model
                 List<Product> products = new List<Product>();
                 foreach (string objInCart in cartObjects)
                 {
-                    products.Add(await StringToProductAsync(objInCart));
+                    Product productToAdd = await StringToProductAsync(objInCart);
+                    if(productToAdd != null)
+                    {
+                        products.Add(productToAdd);
+                    }
                 }
                 return products;
             }
@@ -239,9 +243,19 @@ namespace ECommerceWebApp.Model
             string obj = productString.Replace("(", "");
             obj = obj.Replace(")", "");
             string[] temp = obj.Split(";");
+
             Product productToAdd = await ProductsRepository.GetProductById(temp[0]);
-            productToAdd.Quantity = Int32.Parse(temp[1]);
-            return productToAdd;
+            if(productToAdd != null)
+            {
+                productToAdd.Quantity = Int32.Parse(temp[1]);
+                return productToAdd;
+            }
+            else
+            {
+                removeProductString(temp[0]);
+                return null;
+            }
+
         }
 
     }

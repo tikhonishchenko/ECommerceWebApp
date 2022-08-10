@@ -22,10 +22,6 @@ namespace ECommerceWebApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
@@ -60,7 +56,6 @@ namespace ECommerceWebApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Category = "Product",
                             Description = "Description of product 1",
                             IdString = "0000001",
                             Name = "Product 1",
@@ -71,7 +66,6 @@ namespace ECommerceWebApp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Category = "Product",
                             Description = "Description of product 2",
                             IdString = "0000002",
                             Name = "Product 2",
@@ -82,7 +76,6 @@ namespace ECommerceWebApp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Category = "Product",
                             Description = "Description of product 3",
                             IdString = "0000003",
                             Name = "Product 3",
@@ -93,7 +86,6 @@ namespace ECommerceWebApp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            Category = "Product",
                             Description = "Description of product 4",
                             IdString = "0000004",
                             Name = "Product 4",
@@ -104,7 +96,6 @@ namespace ECommerceWebApp.Data.Migrations
                         new
                         {
                             Id = 5,
-                            Category = "Product",
                             Description = "Description of product 5",
                             IdString = "0000005",
                             Name = "Product 5",

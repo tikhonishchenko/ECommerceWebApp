@@ -10,11 +10,45 @@ export default function Login(){
         username: "",
         password: "",
     });
-
     const [formData, setFormData] = useState(initialFormData);
     const navigate = useNavigate();
-    const [productData, setProductData] = useState(null)
+    const [userData, setUserData] = useState(null)
     const [loading, setLoading] = useState(true)
+    const logout = () => {
+        const url = `${Constants.API_URL_LOGOUT_USER}`;
+    
+        fetch(url, {
+          method: "GET",
+          credentials: "include",
+        })
+          .then((response) => response.status)
+          .then((productsFromServer) => {
+            console.log(productsFromServer);
+            navigate(`/`);
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error);
+            navigate(`/`);
+          });
+      }
+    const getUser = () => {
+        const url = `${Constants.API_URL_GET_USER}`;
+    
+        fetch(url, {
+          method: "GET",
+          credentials: "include",
+        })
+          .then((response) => response.json())
+          .then((productsFromServer) => {
+            setUserData(productsFromServer);
+            console.log(userData);
+            setLoading(false)
+          })
+          .catch((error) => {
+            setLoading(false)
+          });
+      }
 
     const handleChange = (event) => {
         setFormData({
@@ -55,8 +89,18 @@ export default function Login(){
     };
 
 //#endregion
+
+if(loading){
+    getUser();
+    return(
+        <div className='login'>
+            <h1>Loading...</h1>
+        </div>
+    )
+}
+if(userData===null){  
     return (
-        <div class="login">        
+        <div className="login">        
             <form>
                 <h1>Login</h1>
                 <h2>Username</h2>
@@ -70,3 +114,25 @@ export default function Login(){
         </div>
     );
   }
+    else{
+        if(userData.role==="Admin"){
+            return(
+                <div className="login">
+                    <h1>Welcome, {userData.username}</h1>
+                    <h2>You are an admin</h2>
+                    <button onClick={() => navigate("/admin-panel")}>Admin panel</button>
+                    <button onClick={logout}>Logout</button>
+                </div>
+            )
+        }
+        return(
+            <div className="login">
+                <h1>Welcome {userData.username}</h1>
+                <h2>You are logged in</h2>
+                <button onClick={() => navigate("/cart")}>Cart</button>
+                <button onClick={() => navigate("/update-user")}>Change info</button>
+                <button onClick={logout}>Logout</button>
+            </div>
+        )
+    }
+}

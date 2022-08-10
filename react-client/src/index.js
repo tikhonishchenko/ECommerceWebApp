@@ -10,6 +10,7 @@ import {
     Register,
     Shop,
     Details,
+    Admin,
   } from "./components";
   
 
@@ -24,6 +25,7 @@ ReactDOM.render(
                 <Route path='/register' element={<Register />}></Route>
                 <Route path='/shop' element={<Shop />}></Route>
                 <Route path='/details/:productId' element={<Details />}></Route>
+                <Route path='/admin-panel' element={<Admin />}></Route>
             </Routes>
         <Footer />
     </Router>,
