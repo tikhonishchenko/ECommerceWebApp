@@ -24,22 +24,6 @@ export default function Shop() {
         alert(error);
       });
   }
-  function deleteProduct(productId){
-    const url = `${Constants.API_URL_DELETE_PRODUCT_BY_ID}/${productId}`;
-
-    fetch(url, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((responseFromServer) => {
-        console.log(responseFromServer);
-        //OnProductDeleted(productId);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-      });
-  }
   function showDetails(productId){
     navigate(`/details/${productId}`);
   }
@@ -165,6 +149,7 @@ export default function Shop() {
 //#region renderers
 
   function renderProductsTable() {
+    console.log(products);
     return (
       <div>
         <div className="products">

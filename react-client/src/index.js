@@ -11,6 +11,8 @@ import {
     Shop,
     Details,
     Admin,
+    UpdateUser,
+    Cart
   } from "./components";
   
 
@@ -26,6 +28,8 @@ ReactDOM.render(
                 <Route path='/shop' element={<Shop />}></Route>
                 <Route path='/details/:productId' element={<Details />}></Route>
                 <Route path='/admin-panel' element={<Admin />}></Route>
+                <Route path='/update-user' element={<UpdateUser />}></Route>
+                <Route path='/cart' element={<Cart />}></Route>
             </Routes>
         <Footer />
     </Router>,

@@ -100,10 +100,10 @@ namespace ECommerceWebApp.Controllers
 
         [Authorize]
         [HttpGet("get-cart")]
-        public IActionResult GetCart()
+        public async Task<ActionResult<List<Product>>> GetCartAsync()
         {
             CheckUser();
-            return Ok(activeUser.getCartAsync());
+            return Ok(await activeUser.getCartAsync());
         }
         [Authorize]
         [HttpGet("get-user")]

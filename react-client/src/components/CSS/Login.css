@@ -1,19 +1,21 @@
-.login{
+.login, .updateForm{
     text-align:center;
   }
-  
-  .login form{
+  .login-text{
+    text-align: center;
+  }
+  .login form, .updateForm form{
     margin: auto;
   }
   
-  .login form input{
+  .login form input, .updateForm form input{
     height: 30%;
     padding: 10px 10px;
     border: 3px  solid rgb(224, 224, 224);
     transition: all .5s;
   }
   
-  .login form input:focus{
+  .login form input:focus, .updateForm form input:focus{
     height: 30%;
     padding: 10px 10px;
     border: 3px  solid rgb(0, 0, 0);
@@ -30,7 +32,7 @@
     font-weight: bolder;
     font-size: large;
   }
-  .login form button{
+  .login form button, .login-admin button,.login-user button,  .updateForm button{
     font-family: 'Josefin Sans', sans-serif;
     font-weight: bolder;
     font-size: large;
@@ -40,10 +42,23 @@
     font-family: 'Josefin Sans', sans-serif;
   }
 
-  .login form button:hover{
+  .login form button:hover, .login-admin button:hover,.login-user button:hover, .updateForm button:hover{
     padding: 10px 10px;
     border: 3px  solid rgb(0, 0, 0);
     transition: all .5s;
     font-family: 'Josefin Sans', sans-serif;
     cursor:pointer;
+  }
+  .login-admin .buttons, .login-user .buttons{
+    display: flex;
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 40%;
+    justify-content: space-around;
+  }
+
+  .updateForm input{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
   }

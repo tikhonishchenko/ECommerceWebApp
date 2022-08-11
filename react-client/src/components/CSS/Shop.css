@@ -80,7 +80,7 @@
   }
 
 
-  .search button, .products button{
+  .search button, .products button,  .cart button{
     font-family: 'Josefin Sans', sans-serif;
     font-weight: bolder;
     font-size: large;
@@ -88,9 +88,10 @@
     border: 3px  solid rgb(224, 224, 224);
     transition: all .5s;
     font-family: 'Josefin Sans', sans-serif;
+
   }
 
-  .search button:hover, .products button:hover{
+  .search button:hover, .products button:hover,  .cart button:hover{
     padding: 10px 10px;
     border: 3px  solid rgb(0, 0, 0);
     transition: all .5s;
@@ -105,6 +106,22 @@
   .products img{
     width: 100%;
   }
+  .quantityControls{
+    display: flex;
+    justify-content: space-around;
+  }
+  .quantityControls img, .quantityControls a{
+    width: 50px;
+    cursor: pointer;
+  }
+  
+.empty-cart, .checkout-button{
+  margin: auto;
+  width: 60%;
+  text-align: center;
+}
+
+
   @media screen and (max-width: 900px) {
     .product {
       width: 40%;

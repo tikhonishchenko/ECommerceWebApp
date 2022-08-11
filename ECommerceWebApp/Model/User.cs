@@ -22,7 +22,6 @@ namespace ECommerceWebApp.Model
         [Required, MaxLength(100)]
         public string Role { get; set; }
 
-        [Required, MaxLength(1000)]
         public string CartSave { get; set; } = string.Empty;
 
         public void AddProductToCart(Product product)

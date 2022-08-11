@@ -63,7 +63,7 @@ export default function ProductUpdateForm(props) {
     return (
     <div>
         <form className='w-100 px-5'>
-            <h1 className='mt-5'>Update the "{props.product.title}" </h1>
+            <h1 className='mt-5'>Update the "{props.product.name}" </h1>
 
 
             <div className='mt-5'>

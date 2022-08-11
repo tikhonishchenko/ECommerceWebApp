@@ -159,7 +159,24 @@ namespace ECommerceWebApp.Controllers
             await UserRepository.UpdateUserAsync(user);
             return Ok("User updated");
         }
-        
+
+        [Authorize]
+        [HttpDelete("delete-user")]
+        public async Task<IActionResult> DeleteUserAsync(User user)
+        {
+            if (GetCurrentUser().Username == user.Username)
+            {
+                await UserRepository.DeleteUserAsync(user.Id);
+                return Ok("User deleted");
+            }
+            else
+            {
+                return BadRequest("Not allowed");
+            }
+            return BadRequest("something went wrong");
+
+        }
+
         private User GetCurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

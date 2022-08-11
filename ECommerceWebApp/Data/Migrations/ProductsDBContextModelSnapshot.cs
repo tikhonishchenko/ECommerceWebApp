@@ -112,8 +112,6 @@ namespace ECommerceWebApp.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CartSave")
-                        .IsRequired()
-                        .HasMaxLength(1000)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")

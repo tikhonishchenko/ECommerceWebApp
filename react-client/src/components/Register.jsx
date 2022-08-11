@@ -46,13 +46,45 @@ export default function Register() {
       .then((responseFromServer) => {
         console.log(user);
         console.log(responseFromServer);
-        navigate("/");
       })
       .catch((error) => {
         console.log(error);
         alert(error);
+      })
+      .finally(() => {
+        HandleUpdate();
       });
   };
+
+  const HandleUpdate = () => {    
+    const userUpdated = {
+        username: formData.username,
+        password: formData.password,
+    };
+
+    const url = Constants.API_URL_LOGIN_USER;
+    fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userUpdated),
+          
+      })
+      .then(response => response.json())
+      .then(responseFromServer => {
+        console.log(userUpdated)
+        console.log(responseFromServer);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error)
+        console.log(userUpdated)
+        alert(error);
+
+      });
+};
 
   //#endregion
   return (
