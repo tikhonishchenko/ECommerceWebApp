@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
     Footer,
     Home,
@@ -20,7 +20,8 @@ ReactDOM.render(
 
     <Router>
         <Header />
-            <Switch>
+            <Routes>
+                
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>
@@ -29,7 +30,7 @@ ReactDOM.render(
                 <Route path='/admin-panel' element={<Admin />}></Route>
                 <Route path='/update-user' element={<UpdateUser />}></Route>
                 <Route path='/cart' element={<Cart />}></Route>
-            </Switch>
+            </Routes>
         <Footer />
     </Router>,
     
