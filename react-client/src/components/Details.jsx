@@ -55,7 +55,7 @@ export default function Details(){
         if(product.length === 0){
             HandleSubmit();
         }})()}    
-            <img src="https://picsum.photos/600/900" />
+            <img src={product.imageUrl} />
             <div className="description">
                 <h1>{product.name}</h1>
                 <p>{product.idString}</p>

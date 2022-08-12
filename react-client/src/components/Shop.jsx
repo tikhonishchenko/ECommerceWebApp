@@ -156,7 +156,7 @@ export default function Shop() {
               {products.map((product) => (
                 <div className="product" key={product.id}>
                   <div className="details" onClick={() => showDetails(product.idString)}>
-                    <img src="https://picsum.photos/600/900"  />
+                    <img src={product.imageUrl}  />
                     <h1>{product.name}</h1>
                     <h4>{product.idString}</h4>
                     <h2>{product.price}₴</h2>
@@ -189,11 +189,6 @@ export default function Shop() {
           </div>
           <button className="search-button" onClick={searchByParams}>Search</button>
         </div>
-        <button className="btn btn-primary" onClick={getProducts}>Refresh</button>
-        <button className="btn btn-primary" onClick={() => {logout()}}>logout</button>
-        <button className="btn btn-primary" onClick={() => {getUser()}}>get user</button>
-        <button className="btn btn-primary" onClick={() => {addToCart("0000002")}}>add to cart</button>
-        <button className="btn btn-primary" onClick={() => {getAdmin()}}>admin</button>
 
       </div>
     );

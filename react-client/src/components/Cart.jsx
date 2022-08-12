@@ -48,7 +48,9 @@ export default function Cart() {
     for (let i = 0; i < productsToCount.length; i++) {
       total += productsToCount[i].price * productsToCount[i].quantity;
     }
+    total = Math.round(total * 1000) / 1000;
     setTotal(total);
+    
     console.log(total);
   }
   function showDetails(productId){
@@ -138,7 +140,7 @@ export default function Cart() {
                         {products.map((product) => (
                           <div className="product" key={product.id}>
                             <div className="details" onClick={() => showDetails(product.idString)}>
-                              <img src="https://picsum.photos/600/900"  />
+                              <img src={product.imageUrl}  />
                               <h1>{product.name}</h1>
                               <h4>{product.idString}</h4>
                               <h2>{product.price}₴</h2>

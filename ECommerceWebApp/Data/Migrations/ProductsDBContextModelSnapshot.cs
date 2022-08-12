@@ -45,64 +45,11 @@ namespace ECommerceWebApp.Data.Migrations
 
                     b.Property<string>("imageUrl")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Description of product 1",
-                            IdString = "0000001",
-                            Name = "Product 1",
-                            Price = 1.11m,
-                            Quantity = 1,
-                            imageUrl = "https://web.dev/easy-high-dpi-images/"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Description of product 2",
-                            IdString = "0000002",
-                            Name = "Product 2",
-                            Price = 2.22m,
-                            Quantity = 1,
-                            imageUrl = "https://web.dev/easy-high-dpi-images/"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Description of product 3",
-                            IdString = "0000003",
-                            Name = "Product 3",
-                            Price = 3.33m,
-                            Quantity = 1,
-                            imageUrl = "https://web.dev/easy-high-dpi-images/"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Description of product 4",
-                            IdString = "0000004",
-                            Name = "Product 4",
-                            Price = 4.44m,
-                            Quantity = 1,
-                            imageUrl = "https://web.dev/easy-high-dpi-images/"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Description of product 5",
-                            IdString = "0000005",
-                            Name = "Product 5",
-                            Price = 5.55m,
-                            Quantity = 1,
-                            imageUrl = "https://web.dev/easy-high-dpi-images/"
-                        });
                 });
 
             modelBuilder.Entity("ECommerceWebApp.Model.User", b =>
