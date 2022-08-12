@@ -1,5 +1,5 @@
 const API_BASE_URL_DEVELOPMENT ='https://localhost:44333/api';
-const API_BASE_URL_PRODUCTION = 'https://trainingreactnet420.azurewebsites.net';
+const API_BASE_URL_PRODUCTION = 'https://ecommercewebapptishch.azurewebsites.net/api';
 
 const ENDPOINTS = {
     GET_ALL_PRODUCTS: 'product/products',
