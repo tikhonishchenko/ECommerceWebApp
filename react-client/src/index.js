@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom'
 import {
     Footer,
     Home,
@@ -18,7 +19,7 @@ import {
 
 ReactDOM.render(
 
-    <Router>
+    <HashRouter>
         <Header />
             <Routes>
                 
@@ -32,7 +33,7 @@ ReactDOM.render(
                 <Route path='/cart' element={<Cart />}></Route>
             </Routes>
         <Footer />
-    </Router>,
+    </HashRouter>,
     
     
     document.getElementById('root')
