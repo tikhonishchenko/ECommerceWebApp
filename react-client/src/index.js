@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { HashRouter } from 'react-router-dom'
 import {
     Footer,
     Home,
@@ -19,10 +18,9 @@ import {
 
 ReactDOM.render(
 
-    <HashRouter>
+    <Router>
         <Header />
             <Routes>
-                
                 <Route path='/' element={<Home />}></Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>
@@ -33,7 +31,7 @@ ReactDOM.render(
                 <Route path='/cart' element={<Cart />}></Route>
             </Routes>
         <Footer />
-    </HashRouter>,
+    </Router>,
     
     
     document.getElementById('root')
