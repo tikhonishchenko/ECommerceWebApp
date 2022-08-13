@@ -74,7 +74,8 @@ export default function Login() {
       },
       body: JSON.stringify(user),
     })
-      .then((response) => response.json())
+      .then((response) => response.status
+      )
       .then((responseFromServer) => {
         console.log(user);
         console.log(responseFromServer);
