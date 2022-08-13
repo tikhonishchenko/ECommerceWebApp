@@ -67,7 +67,7 @@ namespace ECommerceWebApp
 
             var cookiePolicyOptions = new CookiePolicyOptions
             {
-                MinimumSameSitePolicy = SameSiteMode.None,
+                MinimumSameSitePolicy = SameSiteMode.Lax,
                 Secure = CookieSecurePolicy.Always,
                 HttpOnly = HttpOnlyPolicy.Always                              
             };
