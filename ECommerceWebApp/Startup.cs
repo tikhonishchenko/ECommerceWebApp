@@ -49,7 +49,7 @@ namespace ECommerceWebApp
                             .AllowAnyMethod()
                             .AllowAnyHeader()
                             .AllowCredentials()
-                            .WithOrigins("https://localhost:3000", "https://happy-island-0b08a9e03.1.azurestaticapps.net/");
+                            .WithOrigins("https://localhost:3000", "https://happy-island-0b08a9e03.1.azurestaticapps.net");
                     });
             });
             //services.AddMvc();
