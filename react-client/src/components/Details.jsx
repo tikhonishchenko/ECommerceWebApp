@@ -22,7 +22,6 @@ export default function Details(){
           })
           .catch((error) => {
             console.log(error)
-            alert(error);
           });
     };
     const addToCart = (id) => {

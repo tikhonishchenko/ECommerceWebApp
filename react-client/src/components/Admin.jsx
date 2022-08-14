@@ -23,7 +23,7 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
+        getProducts();
       });
   }
 
@@ -41,43 +41,10 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
+        
       });
   }
 
-  function generateData() {
-    const url = Constants.API_URL_GENERATE_DATA;
-
-    fetch(url, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((productsFromServer) => {
-        setProducts(productsFromServer);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-      });
-  }
-  const logout = () => {
-    const url = `${Constants.API_URL_LOGOUT_USER}`;
-
-    fetch(url, {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((response) => response.status)
-      .then((productsFromServer) => {
-        console.log(productsFromServer);
-        navigate(`/`);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-        navigate(`/`);
-      });
-  }
 const getUser = () => {
     const url = `${Constants.API_URL_GET_USER}`;
 
@@ -114,9 +81,6 @@ const getUser = () => {
                       <div className="mt-5">
                         <button className="btn btn-primary" onClick={getProducts}>
                           Refresh
-                        </button>
-                        <button className="btn btn-primary" onClick={generateData}>
-                          Generate Data
                         </button>
                         <button className="btn btn-secondary" onClick={() => setShowingCreateNewProductForm(true)}>
                           Create Product

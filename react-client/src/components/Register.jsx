@@ -49,7 +49,6 @@ export default function Register() {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
       })
       .finally(() => {
         HandleUpdate();
@@ -81,7 +80,6 @@ export default function Register() {
       .catch((error) => {
         console.log(error)
         console.log(userUpdated)
-        alert(error);
 
       });
 };

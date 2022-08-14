@@ -28,7 +28,6 @@ export default function Login() {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
         navigate(`/`);
       });
   };
@@ -83,7 +82,7 @@ export default function Login() {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
+
       });
   };
 

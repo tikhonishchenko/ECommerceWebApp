@@ -39,6 +39,7 @@ namespace ECommerceWebApp
                     options.LogoutPath = "/api/login/logout";
                     options.Cookie.Name = "UserLoginCookie";
                     options.Cookie.SameSite = SameSiteMode.None;
+                    options.Cookie.IsEssential = true;
                 });
 
             services.AddCors(options =>

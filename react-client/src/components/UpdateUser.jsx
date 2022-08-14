@@ -105,7 +105,6 @@ export default function UpdateUser() {
           })
           .catch((error) => {
             console.log(error)
-            alert(error);
             navigate("/login");
           });
         }
@@ -133,9 +132,7 @@ export default function UpdateUser() {
               })
               .catch((error) => {
                 console.log(error)
-                console.log(userUpdated)
-                alert(error);
-    
+                console.log(userUpdated)    
               });
         };
 

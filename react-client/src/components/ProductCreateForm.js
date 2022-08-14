@@ -53,7 +53,6 @@ export default function ProductCreateForm(props) {
           })
           .catch((error) => {
             console.log(error)
-            alert(error);
           });
           props.OnProductCreated(productToCreate);
     };
