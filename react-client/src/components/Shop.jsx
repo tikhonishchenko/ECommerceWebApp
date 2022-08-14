@@ -21,42 +21,12 @@ export default function Shop() {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
+        getProducts();
       });
+
   }
   function showDetails(productId){
     navigate(`/details/${productId}`);
-  }
-  function logout() {
-    const url = `${Constants.API_URL_LOGOUT_USER}`;
-
-    fetch(url, {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((response) => response.status)
-      .then((productsFromServer) => {
-        console.log(productsFromServer);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-      });
-  }
-  function getUser() {
-    const url = `${Constants.API_URL_GET_USER}`;
-
-    fetch(url, {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((response) => response.json())
-      .then((productsFromServer) => {
-        console.log(productsFromServer);
-      })
-      .catch((error) => {
-        navigate(`/login`);
-      });
   }
 
   const addToCart = (id) => {
@@ -124,26 +94,10 @@ export default function Shop() {
         setProducts(productsFromServer);
       }).catch((error) => {
         console.log(error);
-        alert(error);
       }
       );
   }
-  function getAdmin() {
-    const url = `${Constants.API_URL_SHOW_ADMIN}`;
 
-    fetch(url, {
-      method: "GET",
-      credentials: "include",
-    })
-    .then((response) => response.status===500?response.status:alert("You are not admin"))
-    .then((productsFromServer) => {
-      console.log(productsFromServer);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
-  
 //#endregion
 
 //#region renderers

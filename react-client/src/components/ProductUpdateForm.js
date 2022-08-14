@@ -54,7 +54,6 @@ export default function ProductUpdateForm(props) {
           })
           .catch((error) => {
             console.log(error)
-            alert(error);
           });
           props.OnProductUpdated(productToUpdate);
     };
