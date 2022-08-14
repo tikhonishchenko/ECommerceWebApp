@@ -24,12 +24,12 @@ export default function Login() {
       .then((response) => response.status)
       .then((productsFromServer) => {
         console.log(productsFromServer);
-        navigate(`/`);
+        navigate(`/login`);
       })
       .catch((error) => {
         console.log(error);
         alert(error);
-        navigate(`/`);
+        navigate(`/login`);
       });
   };
   const getUser = () => {
@@ -79,7 +79,7 @@ export default function Login() {
       .then((responseFromServer) => {
         console.log(user);
         console.log(responseFromServer);
-        navigate("/");
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);
